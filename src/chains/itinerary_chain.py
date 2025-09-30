@@ -9,14 +9,14 @@ load_dotenv()
 # Initialize Gemini 2.5 Flash model
 model = ChatGoogleGenerativeAI(model='gemini-2.5-flash')
 
-itnineary_prompt = ChatPromptTemplate([
-    ("system" , "You are a helpful travel asssistant. Create a day trip itineary for {city} based on user's interest : {interests}. Provide a brief , bulleted itineary"),
-    ("human" , "Create a itineary for my day trip")
+itinerary_prompt = ChatPromptTemplate([
+    ("system" , "You are a helpful travel asssistant. Create a day trip itinerary for {city} based on user's interest : {interests}. Provide a brief , bulleted itinerary"),
+    ("human" , "Create a itinerary for my day trip")
 ])
 
 
-def generate_itineary(city:str , interests:list[str]) -> str:
-    chain = itnineary_prompt | model
+def generate_itinerary(city:str , interests:list[str]) -> str:
+    chain = itinerary_prompt | model
     response = chain.invoke({
         "city": city,
         "interests": interests
@@ -26,5 +26,5 @@ def generate_itineary(city:str , interests:list[str]) -> str:
 if __name__ == "__main__":
     city = "Paris"
     interests = ["art", "history", "Eiffel Tower"]
-    itineary = generate_itineary(city, interests)
-    print(itineary)
+    itinerary = generate_itinerary(city, interests)
+    print(itinerary)
