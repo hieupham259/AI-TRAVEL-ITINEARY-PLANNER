@@ -1,4 +1,4 @@
-from langchain_core import HumanMessage, AIMessage
+from langchain_core.messages import HumanMessage, AIMessage
 from src.chains.itinerary_chain import generate_itinerary
 from src.utils.logger import get_logger
 from src.utils.custom_exception import CustomException
