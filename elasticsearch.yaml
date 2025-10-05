@@ -34,7 +34,7 @@ spec:
       
       containers:
         - name: elasticsearch
-          image: docker.elastic.co/elasticsearch/elasticsearch:9.1.4
+          image: docker.elastic.co/elasticsearch/elasticsearch:9.1.4-amd64
           env:
             - name: discovery.type
               value: single-node
