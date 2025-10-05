@@ -27,14 +27,14 @@ spec:
         app: elasticsearch
     spec:
       # Pod-level securityContext (for fsGroup)
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
+      # securityContext:
+      #   runAsUser: 1000
+      #   runAsGroup: 1000
+      #   fsGroup: 1000
       
       containers:
         - name: elasticsearch
-          image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+          image: docker.elastic.co/elasticsearch/elasticsearch:latest
           env:
             - name: discovery.type
               value: single-node
@@ -42,8 +42,8 @@ spec:
               value: "-Xms512m -Xmx512m"
             - name: xpack.security.enabled
               value: "false"
-            - name: ES_DISABLE_CGROUPS
-              value: "true"
+            # - name: ES_DISABLE_CGROUPS
+            #   value: "true"
           ports:
             - containerPort: 9200
           resources:
