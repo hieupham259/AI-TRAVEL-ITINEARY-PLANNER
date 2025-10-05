@@ -26,6 +26,12 @@ spec:
       labels:
         app: elasticsearch
     spec:
+      # Pod-level securityContext (for fsGroup)
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      
       containers:
         - name: elasticsearch
           image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
@@ -36,10 +42,8 @@ spec:
               value: "-Xms512m -Xmx512m"
             - name: xpack.security.enabled
               value: "false"
-            # 🔧 FIX: disable systemd and cgroup features not supported in containers
             - name: ES_DISABLE_CGROUPS
               value: "true"
-            # (optional) if above doesn't exist in this ES version, use this workaround:
             - name: JAVA_TOOL_OPTIONS
               value: "-Des.cgroups.hierarchy.override=/"
           ports:
@@ -54,11 +58,11 @@ spec:
           volumeMounts:
             - mountPath: /usr/share/elasticsearch/data
               name: elasticsearch-storage
-          # (optional but recommended) run as non-root
+          # Container-level securityContext (without fsGroup)
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
-            fsGroup: 1000
+      
       volumes:
         - name: elasticsearch-storage
           persistentVolumeClaim:
