@@ -44,6 +44,8 @@ spec:
               value: "false"
             - name: ES_DISABLE_CGROUPS
               value: "true"
+            - name: xpack.monitoring.collection.enabled
+              value: "false"
           ports:
             - containerPort: 9200
           resources:
